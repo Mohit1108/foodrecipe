@@ -5,10 +5,8 @@ Food Recipe App is a web application developed using React.js. It provides users
 The app fetches recipe data from the Edamam API and displays recipe cards with recipe labels and images. Users can click on a recipe card to view a modal popup with detailed information about the recipe, including ingredients and preparation instructions.
 <br> 
 Food Recipe App is designed with responsiveness in mind, ensuring a seamless user experience across different devices. The codebase is hosted on GitHub, and the live version of the app can be accessed at https://food-recipe-mohit.netlify.app
-
-
-
-**Features of Food Recipe App:
+<br> 
+**Features of Food Recipe App: <br>
 **1. Recipe Search:** Search for your favorite recipes using keywords or specific ingredients.
 **2. Recipe Grid:** View a grid of recipe cards displaying recipe labels and images.
 **3. Recipe Slider for Mobile:** View a Slider of recipe cards in Mobile.
