@@ -6,7 +6,8 @@ export default function Header() {
       <nav className="navbar navbar-expand-lg navbar-light ">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
-            Foodie
+            <i className="bi bi-gem me-3 text-secondary"></i>
+            Foodies Hub
           </a>
           <button
             className="navbar-toggler"

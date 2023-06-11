@@ -6,6 +6,10 @@
   --secondary: #f7c531;
   --heading: #272042;
   --text: #8b8ba5;
+  --purple: #d8cbf6;
+  --yellow: #fdfae5;
+  --white: #fff;
+  --black: #000;
 }
 * {
   font-family: Quicksand;
@@ -30,7 +34,7 @@ p {
 h1 {
   font-weight: 700;
   font-size: 46px;
-  line-height: 70px;
+  line-height: 60px;
   color: var(--heading);
 }
 .btn {
@@ -60,9 +64,16 @@ h1 {
   font-size: 18px;
   line-height: 22px;
 }
-
+a.navbar-brand {
+  border: 4px solid #ffffff;
+  border-radius: 30px 50px 190px;
+  padding: 0px 20px 5px 0px;
+  border-bottom: 5px solid #f7c531;
+  /* border-left: 5px solid #f7c531; */
+}
 a.nav-link.active:after,
-.underLineText:after {
+.underLineText:after,
+a.nav-link:hover:after {
   background: var(--primary);
   content: "";
   height: 4px;
@@ -73,8 +84,19 @@ a.nav-link.active:after,
   z-index: -1;
 }
 
+a.nav-link:after {
+  background: var(--white);
+  content: "";
+  height: 4px;
+  position: relative;
+  border-radius: 100px;
+  display: block;
+  top: -5px;
+  z-index: -1;
+}
+
 h1 .underLineText:after {
-  top: -17px !important;
+  top: -13px !important;
 }
 
 span.underLineText {
@@ -99,7 +121,7 @@ footer h6 {
 
 a.text-reset {
   text-decoration: none;
-  color: #8b8ba5;
+  color: var(--text);
 }
 a.text-reset:hover {
   text-decoration: underline;
@@ -118,13 +140,13 @@ a.text-reset:hover {
 }
 
 .myPopularImage {
-  background: #fdfae5;
+  background: var(--yellow);
   padding: 10px;
   border-radius: 50px 50px 80px 80px;
   /* border: 2px solid #D8CBF6; */
 }
 .imageBg {
-  background: #d8cbf6;
+  background: var(--purple);
   border-radius: 15px 15px 60px 60px;
 }
 .recipeCard {
@@ -139,7 +161,7 @@ a.text-reset:hover {
 }
 input:focus-visible,
 input:focus {
-  outline: 0px solid #fff;
+  outline: 0px solid var(--white);
   border-radius: 0px;
   box-shadow: none !important;
   border-color: var(--heading);
@@ -153,35 +175,7 @@ input {
   background: var(--heading) !important;
 }
 /* CSS */
-/* 
-.recipeCard.col .Description {
-  display: none;
-  z-index: 9999;
-  position: fixed;
-  width: 100vw;
-  min-height: 100vh;
-  justify-content: center;
-  align-content: flex-end !important;
-  flex-direction: row;
-  top: 0;
-  left: 0;
-  background: #0000005e;
-  align-items: center;
-}
-.Description img {
-  width: 200px;
-}
-.Description .card {
-  display: flex;
-  flex-direction: row-reverse;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  max-width: 800px;
-  min-height: 500px;
-  width: 100%;
-} */
+
 /* Modal CSS */
 /* Hide scrollbar for IE, Edge and Firefox */
 .scrollerHide {
@@ -199,4 +193,43 @@ input {
 
 .list-group-item:first-child {
   border-radius: 30px 30px 15px 15px;
+}
+
+.no-recipe {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+}
+.no-recipe p {
+  font-weight: 800;
+  font-size: 22px;
+}
+
+/* Mobile CSS */
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .HeroSection.pt-5 .row,
+  .CTASection .row {
+    gap: 40px;
+  }
+  .modal-dialog.modal-lg {
+    min-width: 100%;
+    padding: 0px 40px;
+  }
+  .hideinMobile {
+    display: none;
+  }
+  .recipeCard {
+    padding: 20px 10px;
+  }
+
+  h1 {
+    font-size: 36px;
+    line-height: 40px;
+  }
+  h1 .underLineText:after {
+    top: -5px !important;
+  }
 }

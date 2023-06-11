@@ -22,7 +22,7 @@ const RecipeModal = ({ showModal, closeModal, recipe }) => {
             <div className="contentDiv p-2">
               <div className="boxText">
                 <div className="row">
-                  <div className="col-4">
+                  <div className="col-sm-12 	col-lg-4 mb-5">
                     <div
                       className="list-group gap-2 mb-2"
                       id="list-tab"
@@ -32,9 +32,9 @@ const RecipeModal = ({ showModal, closeModal, recipe }) => {
                         className="list-group-item list-group-item-action btn"
                         id="list-home-list"
                         data-bs-toggle="list"
-                        href="#list-home"
+                        href="#overview"
                         role="tab"
-                        aria-controls="list-home"
+                        aria-controls="overview"
                       >
                         Overview
                       </a>
@@ -42,9 +42,9 @@ const RecipeModal = ({ showModal, closeModal, recipe }) => {
                         className="list-group-item list-group-item-action btn"
                         id="list-profile-list"
                         data-bs-toggle="list"
-                        href="#list-profile"
+                        href="#health"
                         role="tab"
-                        aria-controls="list-profile"
+                        aria-controls="health"
                       >
                         Health Labels
                       </a>
@@ -52,21 +52,21 @@ const RecipeModal = ({ showModal, closeModal, recipe }) => {
                         className="list-group-item list-group-item-action btn"
                         id="list-messages-list"
                         data-bs-toggle="list"
-                        href="#list-messages"
+                        href="#ingredients"
                         role="tab"
-                        aria-controls="list-messages"
+                        aria-controls="ingredients"
                       >
                         Ingredients
                       </a>
                     </div>
                   </div>
-                  <div className="col-8">
+                  <div className="col-sm-12 col-lg-8	">
                     <div className="tab-content" id="nav-tabContent">
                       <div
                         className="tab-pane fade show active"
-                        id="list-home"
+                        id="overview"
                         role="tabpanel"
-                        aria-labelledby="list-home-list"
+                        aria-labelledby="list-overview-list"
                       >
                         <ul className="">
                           <li className="list-group-item">
@@ -144,9 +144,9 @@ const RecipeModal = ({ showModal, closeModal, recipe }) => {
                       </div>
                       <div
                         className="tab-pane fade"
-                        id="list-profile"
+                        id="health"
                         role="tabpanel"
-                        aria-labelledby="list-profile-list"
+                        aria-labelledby="list-health-list"
                       >
                         <ul className="">
                           <span className="d-flex flex-row gap-3">
@@ -161,9 +161,9 @@ const RecipeModal = ({ showModal, closeModal, recipe }) => {
                       </div>
                       <div
                         className="tab-pane fade"
-                        id="list-messages"
+                        id="ingredients"
                         role="tabpanel"
-                        aria-labelledby="list-messages-list"
+                        aria-labelledby="list-ingredients-list"
                       >
                         <ul>
                           {recipe.recipe.ingredientLines.map((item) => (

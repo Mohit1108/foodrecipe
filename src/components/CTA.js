@@ -7,10 +7,10 @@ export default function CTA() {
     <div className=" AppContainer">
       <div className="CTASection py-5">
         <div className=" d-flex mb-3 row align-items-center">
-          <div className="col-sm-6">
+          <div className="col-md-6">
             <img src={CtaImage} className="img-fluid" alt="Wild Landscape" />
           </div>
-          <div className="col-sm-6">
+          <div className="col-md-6">
             <h1>
               <span className="underLineText">Download</span> our app and join
               the <span className="underLineText"> contest!</span>
@@ -19,11 +19,11 @@ export default function CTA() {
               In order to improve our cooking skills, we do need a food
               photography
             </p>
-            <div className="row pt-5 gap-4 ">
-              <a className="col-sm-5" href="/">
+            <div className=" playBtns gap-4 d-flex">
+              <a className="" href="/">
                 <img src={appleBTN}></img>
               </a>
-              <a className="col-sm-5" href="/">
+              <a className="" href="/">
                 <img src={GooglePlayBTN}></img>
               </a>
             </div>

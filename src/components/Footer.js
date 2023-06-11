@@ -3,22 +3,22 @@ import React from "react";
 export default function Footer() {
   return (
     <div>
-      <footer className="text-center text-lg-start bg-white text-muted">
+      <footer className="text-start text-lg-start bg-white text-muted">
         <section className="">
           <div className=" text-md-start mt-5">
             <div className="row mt-3">
               <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4 text-center">
-                  <i className="bi bi-gem me-3 text-secondary "></i>
-                  Foodie
+                <h6 className="text-uppercase fw-bold mb-3">
+                  <i className="bi bi-gem me-3 text-secondary"></i>
+                  Foodies Hub
                 </h6>
                 <p>
-                  When you eat something that cooked by yourself, the happiness
-                  is priceless.
+                  Welcome to Foodies Hub, your ultimate destination for
+                  mouthwatering recipes and delightful dishes!
                 </p>
               </div>
               <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                <h6 className="text-uppercase  mb-4">Special Course</h6>
+                <h6 className="text-uppercase  mb-4">Special</h6>
                 <p className="d-flex">
                   <a href="#!" className="text-reset">
                     Wedding Foods

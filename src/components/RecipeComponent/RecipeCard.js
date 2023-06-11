@@ -1,24 +1,29 @@
 import React from "react";
 
-export default function RecipeCard() {
+export default function RecipeCard({ recipe, openModal }) {
   return (
-    <div>
-      <div className="col">
-        <div className="card">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp"
-            className="card-img-top"
-            alt="Hollywood Sign on The Hill"
-          />
-          <div className="card-body">
-            <h5 className="card-title">Card title</h5>
-            <p className="card-text">
-              This is a longer card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
-            </p>
-          </div>
-        </div>
+    <div key={recipe.recipe.label} className="recipeCard col">
+      <div className="imageBg">
+        <img
+          alt={recipe.recipe.label}
+          src={recipe.recipe.image}
+          className="card-img-top myPopularImage"
+          onClick={() => openModal(recipe)}
+        />
+      </div>
+      <div className="card-body">
+        <h3 className="card-title">{recipe.recipe.label}</h3>
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item">
+            Calories - {Math.floor(recipe.recipe.calories)}
+          </li>
+          <li className="list-group-item">
+            Meal Type - {recipe.recipe.mealType}
+          </li>
+          <li className="list-group-item">
+            Dish Type - {recipe.recipe.dishType}
+          </li>
+        </ul>
       </div>
     </div>
   );
