@@ -93,6 +93,7 @@ footer h6 {
   font-weight: 500;
   font-size: 22px;
   line-height: 28px;
+  text-align: left;
 }
 
 a.text-reset {
@@ -127,7 +128,7 @@ a.text-reset:hover {
 }
 .recipeCard {
   gap: 20px;
-  padding: 10px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
 }
@@ -149,4 +150,34 @@ input {
 
 .splide__pagination__page.is-active {
   background: var(--heading) !important;
+}
+/* CSS */
+
+.recipeCard.col .Description {
+  display: none;
+  z-index: 9999;
+  position: fixed;
+  width: 100vw;
+  min-height: 100vh;
+  justify-content: center;
+  align-content: flex-end !important;
+  flex-direction: row;
+  top: 0;
+  left: 0;
+  background: #0000005e;
+  align-items: center;
+}
+.Description img {
+  width: 200px;
+}
+.Description .card {
+  display: flex;
+  flex-direction: row-reverse;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  max-width: 800px;
+  min-height: 500px;
+  width: 100%;
 }

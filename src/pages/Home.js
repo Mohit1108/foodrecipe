@@ -5,10 +5,10 @@ import RecipeCard from "../components/RecipeComponent/RecipeGrid";
 import PopularRecipe from "../components/RecipeComponent/PopularRecipe";
 export default function Home() {
   return (
-    <div className=" App">
+    <div className=" AppContainer">
       <div className="HeroSection pt-5">
-        <div className=" d-flex mb-3 row align-items-center gap-5">
-          <div className="col pe-5">
+        <div className="mb-3 row align-items-center">
+          <div className="col-sm-6">
             <h1>
               <span className="underLineText">Eat</span> What You Cook With Us,{" "}
               <span className="underLineText">Together!</span>
@@ -19,7 +19,7 @@ export default function Home() {
             </p>
             <button className="btn Secondarybtn">Search Recipes</button>
           </div>
-          <div className="col">
+          <div className="col-sm-6 ">
             <img
               src={HerobannerImage}
               className="img-fluid"

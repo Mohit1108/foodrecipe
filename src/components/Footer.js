@@ -5,11 +5,12 @@ export default function Footer() {
     <div>
       <footer className="text-center text-lg-start bg-white text-muted">
         <section className="">
-          <div className=" text-center text-md-start mt-5">
+          <div className=" text-md-start mt-5">
             <div className="row mt-3">
               <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">
-                  <i className="bi bi-gem me-3 text-secondary"></i>Foodie
+                <h6 className="text-uppercase fw-bold mb-4 text-center">
+                  <i className="bi bi-gem me-3 text-secondary "></i>
+                  Foodie
                 </h6>
                 <p>
                   When you eat something that cooked by yourself, the happiness
@@ -17,36 +18,36 @@ export default function Footer() {
                 </p>
               </div>
               <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">Special Course</h6>
-                <p>
+                <h6 className="text-uppercase  mb-4">Special Course</h6>
+                <p className="d-flex">
                   <a href="#!" className="text-reset">
                     Wedding Foods
                   </a>
                 </p>
-                <p>
+                <p className="d-flex">
                   <a href="#!" className="text-reset">
                     Healthy and Muscle
                   </a>
                 </p>
-                <p>
+                <p className="d-flex">
                   <a href="#!" className="text-reset">
                     Office Food Daily
                   </a>
                 </p>
               </div>
               <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">Top Recipes</h6>
-                <p>
+                <h6 className="text-uppercase  mb-4">Top Recipes</h6>
+                <p className="d-flex">
                   <a href="#!" className="text-reset">
                     Veg Recipes
                   </a>
                 </p>
-                <p>
+                <p className="d-flex">
                   <a href="#!" className="text-reset">
                     Non-veg Recipes
                   </a>
                 </p>
-                <p>
+                <p className="d-flex">
                   <a href="#!" className="text-reset">
                     Recipe of the Day
                   </a>
@@ -54,7 +55,7 @@ export default function Footer() {
               </div>
 
               <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">Be Our Friend</h6>
+                <h6 className="text-uppercase  mb-4">Be Our Friend</h6>
                 <p className="d-flex">
                   <i className="bi bi-geo-alt me-3 "></i> New York, Gurugram,
                   India
