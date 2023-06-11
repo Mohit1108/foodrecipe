@@ -6,7 +6,7 @@ The app fetches recipe data from the Edamam API and displays recipe cards with r
 <br> 
 Food Recipe App is designed with responsiveness in mind, ensuring a seamless user experience across different devices. The codebase is hosted on GitHub, and the live version of the app can be accessed at https://food-recipe-mohit.netlify.app
 <br> 
-**Features of Food Recipe App: <br>
+# Features of Food Recipe App: <br>
 **1. Recipe Search:** Search for your favorite recipes using keywords or specific ingredients.
 **2. Recipe Grid:** View a grid of recipe cards displaying recipe labels and images.
 **3. Recipe Slider for Mobile:** View a Slider of recipe cards in Mobile.
