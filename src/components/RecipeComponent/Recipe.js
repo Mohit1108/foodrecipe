@@ -33,7 +33,7 @@ export default function Recipe() {
 
     const data = await response.json();
     setRecipes((prevRecipes) => [...prevRecipes, ...data.hits]);
-    console.log(data);
+    // console.log(data);
     setLoading(false);
   };
 

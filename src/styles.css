@@ -210,13 +210,27 @@ input {
 /* Mobile CSS */
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
+
+  ul.navbar-nav {
+    margin-top: 20px;
+  }
+
+  a.nav-link.active:after,
+  a.nav-link:hover:after {
+    display: none;
+  }
   .HeroSection.pt-5 .row,
   .CTASection .row {
     gap: 40px;
   }
   .modal-dialog.modal-lg {
     min-width: 100%;
-    padding: 0px 40px;
+    padding: 0px 20px !important;
+    margin: 10px 0px;
+  }
+  div#health .d-flex {
+    display: flex !important;
+    flex-direction: column !important;
   }
   .hideinMobile {
     display: none;

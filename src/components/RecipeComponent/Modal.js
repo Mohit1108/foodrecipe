@@ -22,7 +22,7 @@ const RecipeModal = ({ showModal, closeModal, recipe }) => {
             <div className="contentDiv p-2">
               <div className="boxText">
                 <div className="row">
-                  <div className="col-sm-12 	col-lg-4 mb-5">
+                  <div className="col-sm-12 	col-lg-4 mb-3">
                     <div
                       className="list-group gap-2 mb-2"
                       id="list-tab"
