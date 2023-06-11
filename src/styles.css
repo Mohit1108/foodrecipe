@@ -49,7 +49,8 @@ h1 {
 .Secondarybtn:hover {
   background-color: var(--primary) !important;
 }
-.btn:hover {
+.btn:hover,
+.btn.active {
   background-color: var(--secondary);
 }
 
@@ -152,7 +153,7 @@ input {
   background: var(--heading) !important;
 }
 /* CSS */
-
+/* 
 .recipeCard.col .Description {
   display: none;
   z-index: 9999;
@@ -180,4 +181,22 @@ input {
   max-width: 800px;
   min-height: 500px;
   width: 100%;
+} */
+/* Modal CSS */
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollerHide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollerHide::-webkit-scrollbar {
+  display: none;
+}
+.ModalRecipe .ImageDiv img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.list-group-item:first-child {
+  border-radius: 30px 30px 15px 15px;
 }

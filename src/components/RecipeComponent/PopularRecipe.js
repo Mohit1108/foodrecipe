@@ -1,35 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-// Default theme
-// import "@splidejs/react-splide/css";
-// import { isLineBreak } from "typescript";
-// import mi from "../../assets/HeroImage.jpg";
-// import MyModal from "./ViewModal";
+import RecipeModal from "./Modal";
+// import { Modal, Button, Card, Row, Col } from "react-bootstrap";
 export default function PopularRecipe() {
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState("");
-  const [query, setQuery] = useState("paneer");
+  const [query, setQuery] = useState("vegetarian");
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // const [clickedRecipe, setCLickedRecipe] = useState("");
-  // // React.useCallback.
   useEffect(() => {
     getRecipes();
-  }, [query]);
+  }, [currentPage]);
+
   const getRecipes = async () => {
-    // let query = "paneer";
     setLoading(true);
-
-    // const check = localStorage.getItem("myRecipes");
-
-    // if (check) {
-    //   setRecipes(JSON.parse(check));
-    //   setLoading(false);
-    // }
     const appID = "c0076e1a";
-
+    const resultsPerPage = 6;
     const response = await fetch(
-      `https://api.edamam.com/search?q=${query}&app_id=${appID}&app_key=${process.env.REACT_APP_NOT_SECRET_CODE}`
+      `https://api.edamam.com/search?q=${query}&app_id=${appID}&app_key=${
+        process.env.REACT_APP_NOT_SECRET_CODE
+      }&from=${currentPage * resultsPerPage}&to=${
+        (currentPage + 1) * resultsPerPage
+      }`
     ).catch((error) => {
       // Stop the loader
       console.error("ERROR- ", error);
@@ -37,8 +31,7 @@ export default function PopularRecipe() {
     });
 
     const data = await response.json();
-    // localStorage.setItem("myRecipes", JSON.stringify(data.hits));
-    setRecipes(data.hits);
+    setRecipes((prevRecipes) => [...prevRecipes, ...data.hits]);
     console.log(data);
     setLoading(false);
   };
@@ -60,8 +53,22 @@ export default function PopularRecipe() {
     setLoading(false);
   };
 
+  const openModal = (recipe) => {
+    setSelectedRecipe(recipe);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const loadMoreRecipes = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
   return (
     <>
+      {/* Form for Getting the Name of Recipe */}
       <form className="d-flex col-8 m-auto pb-2" onSubmit={getSearch}>
         <input
           className="form-control text-center"
@@ -74,181 +81,263 @@ export default function PopularRecipe() {
         </button>
       </form>
       <p className="text-center d-block mb-3"> Search result for - {query}</p>
+      {/* Grid View of Recipes */}
+      <div className="row  row-cols-3">
+        {recipes.map((recipe) => (
+          <div key={recipe.recipe.label} className="recipeCard col">
+            <div className="imageBg">
+              <img
+                alt={recipe.recipe.label}
+                src={recipe.recipe.image}
+                className="card-img-top myPopularImage"
+                onClick={() => openModal(recipe)}
+              />
+            </div>
+            <div className="card-body">
+              <h3 className="card-title">{recipe.recipe.label}</h3>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">
+                  Calories - {Math.floor(recipe.recipe.calories)}
+                </li>
+                <li className="list-group-item">
+                  Meal Type - {recipe.recipe.mealType}
+                </li>
+                <li className="list-group-item">
+                  Dish Type - {recipe.recipe.dishType}
+                </li>
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
       {/* Spinning loader */}
       {loading && (
         <div className="text-center mt-4 loading-circle">
-          <div className="spinner-border" role="status">
+          <div className="spinner-border text-success" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
         </div>
       )}
 
-      <div className="row  row-cols-3">
-        {recipes.slice(0, 6).map((recipes, index) => {
-          return (
-            <div className="recipeCard col">
-              <div className="imageBg">
+      {/* Load More Button */}
+      {recipes.length > 0 && (
+        <div className="text-center">
+          <button className="btn btn-primary" onClick={loadMoreRecipes}>
+            Load More
+          </button>
+        </div>
+      )}
+
+      <RecipeModal
+        showModal={showModal}
+        closeModal={closeModal}
+        recipe={selectedRecipe}
+      />
+
+      {/* Modal */}
+      {/* <Modal
+        className="ModalRecipe"
+        scrollable
+        show={showModal}
+        onHide={closeModal}
+        size="lg"
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        {selectedRecipe && (
+          <>
+            <Modal.Header closeButton>
+              <Modal.Title>{selectedRecipe.recipe.label}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="p-0 scrollerHide">
+              <div className="ImageDiv mb-3">
                 <img
-                  alt={recipes.recipe.label}
-                  src={recipes.recipe.image}
-                  // src={mi}
-                  className="card-img-top myPopularImage"
+                  src={selectedRecipe.recipe.image}
+                  alt={selectedRecipe.recipe.label}
                 />
               </div>
-              <div className="card-body">
-                <h3 className="card-title">{recipes.recipe.label}</h3>
-                {/* <h3>Recipes Title </h3> */}
-                <ul className="list-group list-group-flush">
-                  <li className="list-group-item">
-                    Calories - {Math.floor(recipes.recipe.calories)}
-                  </li>
-                  <li className="list-group-item">
-                    Meal Type - {recipes.recipe.mealType}
-                  </li>
-                  <li className="list-group-item">
-                    Dish Type - {recipes.recipe.dishType}
-                  </li>
-                </ul>
-              </div>
+              <div className="contentDiv p-2">
+                <div className="boxText">
+                  <div className="row">
+                    <div className="col-4">
+                      <div
+                        className="list-group gap-2 mb-2"
+                        id="list-tab"
+                        role="tablist"
+                      >
+                        <a
+                          className="list-group-item list-group-item-action btn"
+                          id="list-home-list"
+                          data-bs-toggle="list"
+                          href="#list-home"
+                          role="tab"
+                          aria-controls="list-home"
+                        >
+                          Overview
+                        </a>
+                        <a
+                          className="list-group-item list-group-item-action btn"
+                          id="list-profile-list"
+                          data-bs-toggle="list"
+                          href="#list-profile"
+                          role="tab"
+                          aria-controls="list-profile"
+                        >
+                          Health Labels
+                        </a>
+                        <a
+                          className="list-group-item list-group-item-action btn"
+                          id="list-messages-list"
+                          data-bs-toggle="list"
+                          href="#list-messages"
+                          role="tab"
+                          aria-controls="list-messages"
+                        >
+                          Ingredients
+                        </a>
+                      </div>
+                    </div>
+                    <div className="col-8">
+                      <div className="tab-content" id="nav-tabContent">
+                        <div
+                          className="tab-pane fade show active"
+                          id="list-home"
+                          role="tabpanel"
+                          aria-labelledby="list-home-list"
+                        >
+                          <ul className="">
+                            <li className="list-group-item">
+                              <b>Calories</b> ~ {""}
+                              {Math.floor(selectedRecipe.recipe.calories)} cal
+                            </li>
+                            <hr />
+                            <span className="d-flex flex-row gap-2">
+                              <b> Caution</b>
+                              <span>
+                                {selectedRecipe.recipe.cautions.map((item) => (
+                                  <li className="list-group-item"> ~ {item}</li>
+                                ))}
+                              </span>
+                            </span>
+                            <hr />
+                            <span className="d-flex flex-row gap-2">
+                              <b> Cuisine Type </b>
+                              <span>
+                                {selectedRecipe.recipe.cuisineType.map(
+                                  (item) => (
+                                    <li className="list-group-item">
+                                      ~ {item}
+                                    </li>
+                                  )
+                                )}
+                              </span>
+                            </span>
+                            <hr />
+                            <span className="d-flex flex-row gap-2">
+                              <b> Diet Labels</b>
+                              <span>
+                                {selectedRecipe.recipe.dietLabels.map(
+                                  (item) => (
+                                    <li className="list-group-item">
+                                      ~ {item}
+                                    </li>
+                                  )
+                                )}
+                              </span>
+                            </span>
+                            <hr />
+                            <span className="d-flex flex-row gap-2">
+                              <b>Dish Type</b>
+                              <span>
+                                {selectedRecipe.recipe.dishType.map((item) => (
+                                  <li className="list-group-item">~ {item}</li>
+                                ))}
+                              </span>
+                            </span>
+                            <hr />
+                            <span className="d-flex flex-row gap-2">
+                              <b>Meal Type</b>
+                              <span>
+                                {selectedRecipe.recipe.mealType.map((item) => (
+                                  <li className="list-group-item">~ {item}</li>
+                                ))}
+                              </span>
+                            </span>
 
-              <div id="descriptionDIV" className="Description">
-                <div className="card">
-                  <img
-                    src={recipes.recipe.image}
-                    className="card-img-top"
-                    alt={recipes.recipe.label}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{recipes.recipe.label}</h5>
-                    <div
-                      className="accordion accordion-flush"
-                      id="accordionFlushExample"
-                    >
-                      <div className="accordion-item">
-                        <h2 className="accordion-header" id="flush-headingOne">
-                          <button
-                            className="accordion-button collapsed"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseOne"
-                            aria-expanded="false"
-                            aria-controls="flush-collapseOne"
-                          >
-                            Ingredient
-                          </button>
-                        </h2>
-                        <div
-                          id="flush-collapseOne"
-                          className="accordion-collapse collapse"
-                          aria-labelledby="flush-headingOne"
-                          data-bs-parent="#accordionFlushExample"
-                        >
-                          <div className="accordion-body">
-                            {recipes.recipe.ingredientLines.map((desc) => (
-                              <p>- {desc}</p>
-                            ))}
-                          </div>
+                            <hr />
+                            <span className="d-flex flex-row gap-2">
+                              <b>Total Time</b>
+                              <span>
+                                <li className="list-group-item">
+                                  ~ {selectedRecipe.recipe.totalTime}Mins
+                                </li>
+                              </span>
+                            </span>
+                            <hr />
+                            <span className="d-flex flex-row gap-2">
+                              <b>Total Weight</b>
+                              <span>
+                                <li className="list-group-item">
+                                  ~{" "}
+                                  {Math.floor(
+                                    selectedRecipe.recipe.totalWeight
+                                  )}
+                                  grms
+                                </li>
+                              </span>
+                            </span>
+
+                            <hr />
+                          </ul>
                         </div>
-                      </div>
-                      <div className="accordion-item">
-                        <h2 className="accordion-header" id="flush-headingTwo">
-                          <button
-                            className="accordion-button collapsed"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseTwo"
-                            aria-expanded="false"
-                            aria-controls="flush-collapseTwo"
-                          >
-                            Health Labels
-                          </button>
-                        </h2>
                         <div
-                          id="flush-collapseTwo"
-                          className="accordion-collapse collapse"
-                          aria-labelledby="flush-headingTwo"
-                          data-bs-parent="#accordionFlushExample"
+                          className="tab-pane fade"
+                          id="list-profile"
+                          role="tabpanel"
+                          aria-labelledby="list-profile-list"
                         >
-                          <div className="accordion-body">
-                            {recipes.recipe.healthLabels.map((Hlabel) => (
-                              <p>- {Hlabel}</p>
-                            ))}
-                          </div>
+                          <ul className="">
+                            <span className="d-flex flex-row gap-3">
+                              <b> Health Labels</b>
+                              <span>
+                                {selectedRecipe.recipe.healthLabels.map(
+                                  (item) => (
+                                    <li className="list-group-item">
+                                      ~ {item}
+                                    </li>
+                                  )
+                                )}
+                              </span>
+                            </span>
+                          </ul>
                         </div>
-                      </div>
-                      <div className="accordion-item">
-                        <h2
-                          className="accordion-header"
-                          id="flush-headingThree"
-                        >
-                          <button
-                            className="accordion-button collapsed"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseThree"
-                            aria-expanded="false"
-                            aria-controls="flush-collapseThree"
-                          >
-                            Accordion Item #3
-                          </button>
-                        </h2>
                         <div
-                          id="flush-collapseThree"
-                          className="accordion-collapse collapse"
-                          aria-labelledby="flush-headingThree"
-                          data-bs-parent="#accordionFlushExample"
+                          className="tab-pane fade"
+                          id="list-messages"
+                          role="tabpanel"
+                          aria-labelledby="list-messages-list"
                         >
-                          <div className="accordion-body">
-                            Placeholder content for this accordion, which is
-                            intended to demonstrate the{" "}
-                            <code>.accordion-flush</code> class. This is the
-                            third item's accordion body. Nothing more exciting
-                            happening here in terms of content, but just filling
-                            up the space to make it look, at least at first
-                            glance, a bit more representative of how this would
-                            look in a real-world application.
-                          </div>
+                          <ul>
+                            {selectedRecipe.recipe.ingredientLines.map(
+                              (item) => (
+                                <li>{item}</li>
+                              )
+                            )}
+                          </ul>
                         </div>
                       </div>
                     </div>
-                    <p className="card-text">
-                      Calories - {recipes.recipe.calories}
-                    </p>
-                    <p className="card-text">
-                      Diet Labels - {recipes.recipe.dietLabels}
-                    </p>
-                    <p className="card-text">
-                      Dish Type - {recipes.recipe.dishType}
-                    </p>
-                    {/* <p className="card-text">
-                      Health Labels -
-                      {recipes.recipe.healthLabels.map((Hlabel) => (
-                        <p>- {Hlabel}</p>
-                      ))}
-                    </p> */}
-                    <p className="card-text">
-                      Total Time - {recipes.recipe.totalTime}mins
-                    </p>
-                    {/* <div className="card-text">
-                      Ingredient -
-                      {recipes.recipe.ingredientLines.map((desc) => (
-                        <p>- {desc}</p>
-                      ))} */}
-                    {/* </div> */}
-                    <p className="card-text">
-                      Meal Type - {recipes.recipe.mealType}
-                    </p>
-                    <p className="card-text">
-                      Total Weight - {Math.floor(recipes.recipe.totalWeight)}
-                      grams
-                    </p>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={closeModal}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </>
+        )}
+      </Modal> */}
     </>
   );
 }
