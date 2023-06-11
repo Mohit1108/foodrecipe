@@ -4,7 +4,7 @@ import RecipeCard from "./RecipeCard";
 import RecipeSlider from "./RecipeSlider";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
-export default function PopularRecipe() {
+export default function Recipe() {
   const [recipes, setRecipes] = useState([]);
   const [searchQuery, setSearchQuery] = useState("Paneer"); // Set default search query
   const [loading, setLoading] = useState(false);

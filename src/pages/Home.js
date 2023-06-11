@@ -1,7 +1,7 @@
 import React from "react";
 import HerobannerImage from "../assets/HeroBannerImage.jpg";
 import CTA from "../components/CTA";
-import PopularRecipe from "../components/RecipeComponent/PopularRecipe";
+import Recipe from "../components/RecipeComponent/Recipe";
 export default function Home() {
   return (
     <div className=" AppContainer">
@@ -39,7 +39,7 @@ export default function Home() {
             Recipes to Try
           </h2>
         </div>
-        <PopularRecipe />
+        <Recipe />
       </section>
       {/* </div> */}
 
