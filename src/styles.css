@@ -246,4 +246,12 @@ input {
   h1 .underLineText:after {
     top: -5px !important;
   }
+
+  a.navbar-brand {
+    /* border: 0px solid #fff; */
+    border-bottom: 3px solid #f7c531;
+    border-radius: 30px 50px 190px;
+    padding: 0 15px 0px 0;
+    font-size: 20px;
+  }
 }
