@@ -254,4 +254,10 @@ input {
     padding: 0 15px 0px 0;
     font-size: 20px;
   }
+  .playBtns.gap-4.d-flex {
+    gap: 10px !important;
+  }
+  .playBtns img {
+    width: 80%;
+  }
 }
